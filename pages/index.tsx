@@ -1,17 +1,25 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Categories, PostCard, PostWidget } from '../components'
+import { Categories, PostCard, PostWidget, TAuthor } from '../components'
 import { useMemo } from 'react'
 import { getPosts } from '../services'
-export type TPosts = {
+export type TPostDetails = {
   title: string
   excerpt: string
+  author: TAuthor
+  createdAt: string
+  featuredImage: string
+  slug: string
+}
+export type TNode = {
+  node: TPostDetails
+}
+export interface TPost {
+  posts: TNode[]
 }
 
-const Home: NextPage = (props) => {
+const Home = (props: TPost): JSX.Element => {
   const { posts } = props
-  console.log(posts.node);
-  
   const renderedPost = useMemo(() => {
     return posts.map((post, index) => (
       <PostCard post={post.node} key={`posts-${index}`} />
@@ -39,5 +47,5 @@ export default Home
 export const getStaticProps = async () => {
   const posts = (await getPosts()) || []
 
-  return { props: { posts } }
+  return { props: {posts} }
 }
