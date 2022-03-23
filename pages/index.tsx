@@ -25,6 +25,8 @@ const Home = (props: TPost): JSX.Element => {
       <PostCard post={post.node} key={`posts-${index}`} />
     ))
   }, [])
+  console.log(posts[0].node.slug);
+  
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -34,7 +36,7 @@ const Home = (props: TPost): JSX.Element => {
       <div>{renderedPost}</div>
       <div>
         <div>
-          <PostWidget />
+          <PostWidget slug={posts[0].node.slug} categories={''} />
           <Categories />
         </div>
       </div>

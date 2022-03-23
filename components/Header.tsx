@@ -12,9 +12,11 @@ const categories: TCategories[] = [
 function Header() {
   const renderedCategories = useMemo(() => {
     return categories.map((category) => {
-      return <Link key={category.slug} href={`/category/${category.slug}`}>
-        <span>{category.name}</span>
-      </Link>
+      return (
+        <Link key={category.slug} href={`/category/${category.slug}`}>
+          <span>{category.name}</span>
+        </Link>
+      )
     })
   }, [])
   return (
